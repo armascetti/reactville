@@ -1,10 +1,13 @@
 import React from 'react'
 
 const CategoryMenu = (props) => {
-  const categoriesArr = [...new Set(props.products.map((product) => product.category))]
-  console.log("categories", categoriesArr)
+
+  const categoriesArr = [...new Set(props.products.map(
+    (product) => product.category
+  ))]
+
   return (
-    <select onChange={(e) => props.setProductCategory(e.target.value)} >
+    <select onChange={(e) => props.setProductCategory(e.target.value)}>
       {categoriesArr.map((category, index) => (
         <option key={index} value={category}>
           {category}
@@ -13,6 +16,6 @@ const CategoryMenu = (props) => {
     </select>
   )
 }
-
 export default CategoryMenu
+
 

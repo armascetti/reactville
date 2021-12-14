@@ -3,7 +3,7 @@ import React from "react"
 const Ingredient = (props) => {
 	console.log("data HERE", props)
 	return (
-		<li style={{background: props.ingredient.color}}>
+		<li style={{ background: props.ingredient.color }}>
 			{props.ingredient.name}
 			{
 				props.isList ?
@@ -14,6 +14,6 @@ const Ingredient = (props) => {
 		</li>
 
 	)
-		}
+}
 
 export default Ingredient

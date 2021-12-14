@@ -10,6 +10,7 @@ const DisplayProducts = (props) => {
             <Product
               key={index}
               product={product}
+              addToCart={props.addToCart}
             />
           )
       })}

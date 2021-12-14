@@ -1,19 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
+import CartItem from './CartItem'
 
-const Cart = () => {
+const Cart = (props) => {
+  console.log("cart here", props)
+
+  const [message, setMessage] = useState('')
+  const format = (num) => (Math.round(num * 100) / 100).toFixed(2)
+
+  const total = format(props.cart.reduce((sum, item) => {
+    return item.quantity > 1 ?
+      sum + (item.price * item.quantity)
+      :
+      sum + item.price
+  }, 0))
+
+  const handleCheckout = () => {
+    const checkoutStatus = props.handleExchange(total)
+    checkoutStatus ? clearCart() : setMessage('Payment declined!')
+  }
+
+  const clearCart = () => {
+    props.setCart([])
+    setMessage('')
+  }
   return (
     <div className="cart">
       <h3>Cart</h3>
+      <p>{message}</p>
 
-      Use the map function to manipulate cart state and pass props to CartItem here
-
+      {props.cart.map((item, index) => (
+        <CartItem
+          key={index}
+          item={item}
+          removeFromCart={props.removeFromCart}
+        />
+      ))}
       <div className="cart-total">
         <p>Total:</p>
-        <p>$ Display Amount Here</p>
+        <p>${total}</p>
       </div>
 
-      <button>CHECKOUT</button>
-      <button>CLEAR CART</button>
+      <button onClick={handleCheckout}>CHECKOUT</button>
+      <button onClick={clearCart}>CLEAR CART</button>
     </div>
   )
 }
